@@ -15,7 +15,7 @@ resource_group = config["resource_group"]
 subscription_id = config["subscription_id"]
 #location = config["location"]
 
-#cli_auth = AzureCliAuthentication()
+cli_auth = AzureCliAuthentication()
 # Use interactive login authentication to authenticate the workspace
 auth = InteractiveLoginAuthentication()
 
@@ -23,8 +23,8 @@ try:
     ws = Workspace.get(
         name=workspace_name,
         subscription_id=subscription_id,
-        resource_group=resource_group
-        #auth=auth
+        resource_group=resource_group,
+        auth=cli_auth
     )
     print("Workspace already exists")
 except:
