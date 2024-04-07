@@ -1,0 +1,35 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.9.13'
+    addToPath: true
+
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    # Run the shell script to install requirements
+    cd environment_setup
+    chmod +x install_requirements.sh
+    ./install_requirements.sh
+  displayName: 'Install Requirements'
+
+- script: |
+    # Run the workspace.py file to create the workspace
+    python aml_service/00_Workspace.py
+  displayName: 'Create Workspace'
+
+
+
