@@ -26,10 +26,12 @@ steps:
     ./install_requirements.sh
   displayName: 'Install Requirements'
 
-- script: |
-    # Run the workspace.py file to create the workspace
-    python aml_service/00_Workspace.py
-  displayName: 'Create Workspace'
+- task: AzureCLI@1
+  displayName: 'Create or Get Workspace'
+  inputs:
+    azureSubscription: 'Azure subscription 1 (21db576f-9f72-4aa6-ac5a-b26c33cd7e47)'
+    scriptLocation: inlineScript
+    inlineScript: 'python aml_service/00-Workspace.py'
 
 
 
