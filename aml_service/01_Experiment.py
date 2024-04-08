@@ -6,7 +6,7 @@ from azureml.core.authentication import AzureCliAuthentication
 
 def getExperiment():
     # Specify the path to your config.json file
-    config_path = 'AML_config/config.json'
+    config_path = 'aml_config/config.json'
 
     ws = Workspace.from_config(path=config_path)
     #script_folder = "."
