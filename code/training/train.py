@@ -7,7 +7,7 @@ import torch.nn.functional as F
 
 from model import Net
 from azureml.core import Run
-import load_data
+import load.load_data as load_data
 
 #ADDITIONAL CODE: get AML run from the current context
 run=Run.get_context()
