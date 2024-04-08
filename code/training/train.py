@@ -7,7 +7,7 @@ import torch.nn.functional as F
 
 from model import Net
 from azureml.core import Run
-import load.load_data as load_data
+from load.load_data import data_loading
 
 #ADDITIONAL CODE: get AML run from the current context
 run=Run.get_context()
@@ -15,7 +15,7 @@ run=Run.get_context()
 
 def train_data():
     torch.manual_seed(0)
-    trainloader=load_data.data_loading()
+    trainloader=data_loading()
     
 
     net=Net()
@@ -60,6 +60,5 @@ def train_data():
     #torch.save(net.state_dict(),'./models/model_1.pth')
     
 if __name__=="__main__":
-    print(sys.path)
     train_data()
     
