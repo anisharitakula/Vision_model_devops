@@ -14,9 +14,9 @@ if __name__=="__main__":
     run_config_user_managed = RunConfiguration()
     run_config_user_managed.environment.python.user_managed_dependencies = True
 
-    config=ScriptRunConfig(source_directory='./code',script='training/train.py',
-                           run_config='run_config_user_managed',
-                           compute_target='cpu-cluster')
+    config=ScriptRunConfig(source_directory="./code",script="training/train.py",
+                           run_config=run_config_user_managed,
+                           compute_target="cpu-cluster")
     
     
     run=experiment.submit(config)
