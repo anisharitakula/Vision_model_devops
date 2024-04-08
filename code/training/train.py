@@ -4,8 +4,6 @@ import os
 
 #import torchvision.transforms as transforms
 import torch.nn.functional as F
-import sys
-sys.path.append('/code/training')
 
 from model import Net
 from azureml.core import Run
