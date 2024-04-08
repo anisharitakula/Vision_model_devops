@@ -6,11 +6,9 @@ from azureml.core.authentication import AzureCliAuthentication
 
 def getExperiment():
     # Specify the path to your config.json file
-    print("checkpoint1")
     config_path = 'aml_config/config.json'
 
     ws = Workspace.from_config(path=config_path)
-    print("checkpoint2")
     #script_folder = "."
     experiment_name = "vision-model-devops"
     exp = Experiment(workspace=ws, name=experiment_name)
