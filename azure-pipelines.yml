@@ -41,7 +41,7 @@ steps:
     inlineScript: 'python aml_service/01_Experiment.py'
 
 - task: AzureCLI@1
-  displayName: 'Create Experiment'
+  displayName: 'Model Training'
   inputs:
     azureSubscription: 'Azure subscription 1 (21db576f-9f72-4aa6-ac5a-b26c33cd7e47)'
     scriptLocation: inlineScript
