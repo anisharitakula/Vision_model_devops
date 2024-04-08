@@ -4,6 +4,8 @@ import os
 
 #import torchvision.transforms as transforms
 import torch.nn.functional as F
+import sys
+sys.path.append('/code/training')
 
 from model import Net
 from azureml.core import Run
@@ -60,5 +62,6 @@ def train_data():
     #torch.save(net.state_dict(),'./models/model_1.pth')
     
 if __name__=="__main__":
+    print(sys.path)
     train_data()
     
