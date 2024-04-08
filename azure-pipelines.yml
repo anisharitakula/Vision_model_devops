@@ -33,7 +33,10 @@ steps:
     scriptLocation: inlineScript
     inlineScript: 'python aml_service/00_Workspace.py'
 
-- script: |
-    python aml_service/01_Experiment.py
-  displayName: 'Experiment set up'
+- task: AzureCLI@1
+  displayName: 'Create Experiment'
+  inputs:
+    azureSubscription: 'Azure subscription 1 (21db576f-9f72-4aa6-ac5a-b26c33cd7e47)'
+    scriptLocation: inlineScript
+    inlineScript: 'python aml_service/01_Experiment.py'
 
