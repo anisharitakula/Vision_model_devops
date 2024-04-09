@@ -58,7 +58,21 @@ def train_data():
     #Save model state
     #os.makedirs('./models', exist_ok=True)
     #torch.save(net.state_dict(),'./models/model_1.pth')
-    
+
+    # Define the path where you want to save the model
+    model_name = "pytorch_model.pth"
+
+    # Save the PyTorch model
+    torch.save(net.state_dict(), model_name)
+
+    # Upload the model file explicitly into artifacts
+    run.upload_file(name="./outputs/" + model_name, path_or_stream=model_name)
+    print("Uploaded the model {} to experiment {}".format(model_name, run.experiment.name))
+
+    print("Following files are uploaded ")
+    print(run.get_file_names())
+    run.complete()
+
 if __name__=="__main__":
     train_data()
     
