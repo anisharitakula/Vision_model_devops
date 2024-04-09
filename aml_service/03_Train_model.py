@@ -7,7 +7,7 @@ if __name__=="__main__":
     config_path='aml_config/config.json'
     ws=Workspace.from_config(path=config_path)
     # Attach Experiment
-    experiment_name = "devops-ai-demo"
+    experiment_name = "vision-model-devops"
     experiment = Experiment(workspace=ws, name=experiment_name)
 
     # Editing a run configuration property on-fly.
