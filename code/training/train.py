@@ -52,7 +52,7 @@ def train_data():
                 print(f"epoch={epoch+1},batch={i+1:5}: loss {loss:.2f}")
                 running_loss=0.0
                 epoch_batch_loss.append([epoch,loss])
-            run.log('final_loss',epoch_batch_loss[-1])
+    run.log('final_loss',epoch_batch_loss[-1][1])
     print(f"Finished training")
     #print(epoch_batch_loss)
 
