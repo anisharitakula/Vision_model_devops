@@ -46,3 +46,17 @@ steps:
     azureSubscription: 'Azure subscription 1 (21db576f-9f72-4aa6-ac5a-b26c33cd7e47)'
     scriptLocation: inlineScript
     inlineScript: 'python aml_service/03_Train_model.py'
+
+- task: AzureCLI@1
+  displayName: 'Model Evaluation'
+  inputs:
+    azureSubscription: 'Azure subscription 1 (21db576f-9f72-4aa6-ac5a-b26c33cd7e47)'
+    scriptLocation: inlineScript
+    inlineScript: 'python aml_service/04_Evaluate_model.py'
+
+- task: AzureCLI@1
+  displayName: 'Register Model'
+  inputs:
+    azureSubscription: 'Azure subscription 1 (21db576f-9f72-4aa6-ac5a-b26c33cd7e47)'
+    scriptLocation: inlineScript
+    inlineScript: 'python aml_service/05_Register_model.py'
