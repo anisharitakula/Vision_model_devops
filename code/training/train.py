@@ -20,7 +20,7 @@ def train_data():
 
     net=Net()
     criterion=torch.nn.CrossEntropyLoss()
-    lr=0.0015
+    lr=0.002
     optimizer=optim.SGD(net.parameters(),lr=lr,momentum=0.9)
     #ADDITIONAL CODE: log loss metric to AML
     run.log('learning_rate',lr)
