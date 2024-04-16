@@ -1,0 +1,20 @@
+name: project_environment
+dependencies:
+  # The python interpreter version.
+
+  # Currently Azure ML Workbench only supports 3.5.2 and later.
+
+- python=3.9.13
+  # Required by azureml-defaults, installed separately through Conda to
+
+  # get a prebuilt version and not require build tools for the install.
+
+- psutil=5.9.0
+
+- pip:
+    # Required packages for AzureML execution, history, and data preparation.
+  - azureml-sdk[notebooks]    # add the version to lock it ==0.1.74
+  - scipy==1.0.0
+  - torch==2.2.2
+  - torchvision==0.17.2
+  - pytest==8.1.1
