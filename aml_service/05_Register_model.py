@@ -53,3 +53,11 @@ print(
         model.name, model.description, model.version
     )
 )
+
+# Writing the registered model details to /aml_config/model.json
+model_json = {}
+model_json["model_name"] = model.name
+model_json["model_version"] = model.version
+model_json["run_id"] = run_id
+with open("aml_config/model.json", "w") as outfile:
+    json.dump(model_json, outfile)
