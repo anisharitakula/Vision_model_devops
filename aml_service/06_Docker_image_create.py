@@ -42,40 +42,23 @@ env_docker_conda = Environment(
     name="docker-image-pytorch-vision",
     description="Image with vision model",
 )
-image_config = ContainerImage.image_configuration(
-    execution_script="score.py",  # Path to the scoring script
-    runtime="python-slim",         # Runtime environment
-    conda_file="conda_dependencies.yml",  # Conda environment file
-    description="Image with vision model",
-    tags={"area": "mnist", "type": "vision"}
-)
-image = Image.create(workspace=ws,
-                     name="pytorch-vision-image",
-                     models=[model],
-                     image_config=image_config)
 
-image.wait_for_creation(show_output=True)
+# Set the post_creation_script property to the script you want to run
+env_docker_conda.post_creation_script = "python score.py"
+
 os.chdir("../..")
 
-if image.creation_state != "Succeeded":
-    raise Exception("Image creation status: {image.creation_state}")
 
-print(
-    "{}(v.{} [{}]) stored at {} with build log {}".format(
-        image.name,
-        image.version,
-        image.creation_state,
-        image.image_location,
-        image.image_build_log_uri,
-    )
-)
 # Publish environment to Azure ML Studio
-env_docker_conda.publish(workspace=ws)
+# env_docker_conda.publish(workspace=ws)
+
+# Register the environment
+env_docker_conda.register(workspace=ws)
 
 # Writing the image details to /aml_config/image.json
 image_json = {}
-image_json["image_name"] = image.name
-image_json["image_version"] = image.version
-image_json["image_location"] = image.image_location
+image_json["image_name"] = env_docker_conda.name
+image_json["image_version"] = env_docker_conda.version
+
 with open("aml_config/image.json", "w") as outfile:
     json.dump(image_json, outfile)
