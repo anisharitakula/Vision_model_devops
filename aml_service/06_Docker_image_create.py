@@ -1,8 +1,10 @@
 import os, json, sys
-from azureml.core import Workspace
-from azureml.core.image import ContainerImage, Image
+from azureml.core import Workspace, Environment
+#from azureml.core.image import ContainerImage, Image
 from azureml.core.model import Model
 from azureml.core.authentication import AzureCliAuthentication
+from azureml.core.container_registry import ContainerRegistry
+from azureml.core import Image
 #cli_auth = AzureCliAuthentication()
 
 # Get workspace
@@ -32,19 +34,19 @@ print(
 )
 
 os.chdir("./code/scoring")
-image_name = "vision-model-score"
 
-image_config = ContainerImage.image_configuration(
-    execution_script="score.py",
-    runtime="python-slim",
+env_docker_conda = Environment(
+    image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
     conda_file="conda_dependencies.yml",
+    name="docker-image-pytorch-vision",
     description="Image with vision model",
-    tags={"area": "mnist", "type": "vision"},
 )
-
-image = Image.create(
-    name=image_name, models=[model], image_config=image_config, workspace=ws
-)
+image_config = ContainerRegistry()
+image = Image.create(workspace=ws,
+                     name="pytorch-vision-image",
+                     models=[],
+                     image_config=image_config,
+                     workspace=ws)
 
 image.wait_for_creation(show_output=True)
 os.chdir("../..")
@@ -61,6 +63,8 @@ print(
         image.image_build_log_uri,
     )
 )
+# Publish environment to Azure ML Studio
+env_docker_conda.publish(workspace=ws)
 
 # Writing the image details to /aml_config/image.json
 image_json = {}
