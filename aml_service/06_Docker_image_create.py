@@ -44,9 +44,8 @@ env_docker_conda = Environment(
 image_config = ContainerRegistry()
 image = Image.create(workspace=ws,
                      name="pytorch-vision-image",
-                     models=[],
-                     image_config=image_config,
-                     workspace=ws)
+                     models=[model],
+                     image_config=image_config)
 
 image.wait_for_creation(show_output=True)
 os.chdir("../..")
