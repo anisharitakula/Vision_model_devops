@@ -5,6 +5,7 @@ from azureml.core.model import Model
 from azureml.core.authentication import AzureCliAuthentication
 from azureml.core.container_registry import ContainerRegistry
 from azureml.core import Image
+from azureml.core.image import ImageConfig
 #cli_auth = AzureCliAuthentication()
 
 # Get workspace
@@ -41,7 +42,13 @@ env_docker_conda = Environment(
     name="docker-image-pytorch-vision",
     description="Image with vision model",
 )
-image_config = ContainerRegistry()
+image_config = ImageConfig(
+    execution_script="score.py",  # Path to the scoring script
+    runtime="python-slim",         # Runtime environment
+    conda_file="conda_dependencies.yml",  # Conda environment file
+    description="Image with vision model",
+    tags={"area": "mnist", "type": "vision"}
+)
 image = Image.create(workspace=ws,
                      name="pytorch-vision-image",
                      models=[model],
