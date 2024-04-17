@@ -1,5 +1,5 @@
 import os, json, sys
-from azureml.core import Workspace, Environment
+from azureml.core import Workspace, Environment, ScriptRunConfig
 #from azureml.core.image import ContainerImage, Image
 from azureml.core.model import Model
 from azureml.core.authentication import AzureCliAuthentication
@@ -43,8 +43,11 @@ env_docker_conda = Environment(
     description="Image with vision model",
 )
 
-# Set the post_creation_script property to the script you want to run
-env_docker_conda.post_creation_script = "python score.py"
+config=ScriptRunConfig(script='score.py',
+                           compute_target='cpu-cluster')
+
+config.run_config.environment=env_docker_conda
+
 
 os.chdir("../..")
 
