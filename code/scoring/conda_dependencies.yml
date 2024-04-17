@@ -13,7 +13,8 @@ dependencies:
 
 - pip:
     # Required packages for AzureML execution, history, and data preparation.
-  - azureml-sdk[notebooks]    # add the version to lock it ==0.1.74
+  - azure-cli==2.30.0
+  - --upgrade azureml-sdk[notebooks]    # add the version to lock it ==0.1.74
   - scipy==1.0.0
   - torch==2.2.2
   - torchvision==0.17.2
