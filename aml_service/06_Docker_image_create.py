@@ -43,7 +43,7 @@ env_docker_conda = Environment(
     description="Image with vision model",
 )
 
-config=ScriptRunConfig(script='score.py',
+config=ScriptRunConfig(source_directory='.',script='score.py',
                            compute_target='cpu-cluster')
 
 config.run_config.environment=env_docker_conda
