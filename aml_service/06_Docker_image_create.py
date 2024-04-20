@@ -1,5 +1,5 @@
 import os, json, sys
-from azureml.core import Workspace, Environment, ScriptRunConfig
+from azureml.core import Workspace, Experiment, Environment, ScriptRunConfig
 #from azureml.core.image import ContainerImage, Image
 from azureml.core.model import Model
 from azureml.core.authentication import AzureCliAuthentication
@@ -11,6 +11,8 @@ from azureml.core.image import ContainerImage
 # Get workspace
 config_path='aml_config/config.json'
 ws = Workspace.from_config(path=config_path)
+experiment=Experiment(workspace=ws,name='vision-model-devops')
+
 
 # Get the latest model details
 
@@ -48,6 +50,9 @@ config=ScriptRunConfig(source_directory='.',script='score.py',
 
 config.run_config.environment=env_docker_conda
 
+run=experiment.submit(config)
+aml_url=run.get_portal_url()
+print(aml_url)
 
 os.chdir("../..")
 
