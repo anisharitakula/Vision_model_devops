@@ -36,16 +36,16 @@ print(
     )
 )
 
-os.chdir("./code/scoring")
+#os.chdir("./code/scoring")
 
 env_docker_conda = Environment(
     image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
-    conda_file="conda_dependencies.yml",
+    conda_file="./code/scoring/conda_dependencies.yml",
     name="docker-image-pytorch-vision",
     description="Image with vision model",
 )
 
-config=ScriptRunConfig(source_directory='.',script='score.py',
+config=ScriptRunConfig(source_directory='./code/scoring',script='score.py',
                            compute_target='cpu-cluster')
 
 config.run_config.environment=env_docker_conda
@@ -54,7 +54,7 @@ run=experiment.submit(config)
 aml_url=run.get_portal_url()
 print(aml_url)
 
-os.chdir("../..")
+#os.chdir("../..")
 
 
 # Publish environment to Azure ML Studio
