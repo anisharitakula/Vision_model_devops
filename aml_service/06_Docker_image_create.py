@@ -38,17 +38,21 @@ print(
 
 #os.chdir("./code/scoring")
 
-env_docker_conda = Environment(
-    image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
-    conda_file="./code/scoring/conda_dependencies.yml",
-    name="docker-image-pytorch-vision",
-    description="Image with vision model",
-)
+# env_docker_conda = Environment(
+#     image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
+#     conda_file="./code/scoring/conda_dependencies.yml",
+#     name="docker-image-pytorch-vision",
+#     description="Image with vision model",
+# )
 
 config=ScriptRunConfig(source_directory='./code/scoring',script='score.py',
                            compute_target='cpu-cluster')
 
-config.run_config.environment=env_docker_conda
+#config.run_config.environment=env_docker_conda
+
+env=Environment.from_conda_specification(name='docker-image-pytorch-vision',file_path=
+                                             './code/scoring/conda_dependencies.yml')
+config.run_config.environment=env
 
 run=experiment.submit(config)
 aml_url=run.get_portal_url()
@@ -61,7 +65,7 @@ print(aml_url)
 # env_docker_conda.publish(workspace=ws)
 
 # Register the environment
-env_docker_conda.register(workspace=ws)
+env.register(workspace=ws)
 
 # Writing the image details to /aml_config/image.json
 image_json = {}
