@@ -7,7 +7,7 @@ dependencies:
   - pip
   - pip:
     - azure-cli==2.30.0
-    - --upgrade azureml-sdk[notebooks]    # add the version to lock it ==0.1.74
+    - azureml-sdk[notebooks]    # add the version to lock it ==0.1.74
     - scipy==1.0.0
     - torch==2.2.2
     - torchvision==0.17.2

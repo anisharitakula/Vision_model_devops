@@ -69,8 +69,8 @@ env.register(workspace=ws)
 
 # Writing the image details to /aml_config/image.json
 image_json = {}
-image_json["image_name"] = env_docker_conda.name
-image_json["image_version"] = env_docker_conda.version
+image_json["image_name"] = env.name
+image_json["image_version"] = env.version
 
 with open("aml_config/image.json", "w") as outfile:
     json.dump(image_json, outfile)
