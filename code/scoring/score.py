@@ -1,3 +1,18 @@
+from pathlib import Path
+
+# Get the parent directory of the current file
+parent_dir = Path(__file__).resolve().parent.parent
+
+# Add the parent directory to the Python module search path
+import sys
+sys.path.append(str(parent_dir))
+
+
+import subprocess
+
+# Log installed Python packages
+subprocess.run(['pip', 'list'])
+
 import pickle
 import json
 import numpy
@@ -5,6 +20,7 @@ import torch
 from training.model import Net
 from azureml.core.model import Model
 from load.load_data import data_loading
+
 
 def get_input():
     trainloader=data_loading()
